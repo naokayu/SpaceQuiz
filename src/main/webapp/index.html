@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>宇宙クイズ - スタート画面付き</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>宇宙クイズ 🚀</h1>
+
+  <!-- スタート画面 -->
+  <div id="start-screen">
+    <p>宇宙や星に関するクイズに挑戦しましょう！</p>
+    <button class="start-btn" onclick="startQuiz()">スタート</button>
+  </div>
+
+  <!-- クイズ画面 -->
+<div id="quiz-container" class="hidden">
+  <p id="question"></p>
+  <div id="choices"></div>
+  <div id="result"></div>
+<div id="score"></div>
+</div>
+
+<!-- 結果画面 -->
+<div id="end-screen" class="hidden">
+  <h2>クイズ終了！</h2>
+  <div id="final-score"></div>
+  <button class="replay-btn" onclick="restartQuiz()">もう一度プレイ</button>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+    
