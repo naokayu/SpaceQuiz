@@ -8,8 +8,8 @@
 </head>
 <body>
 <form action="LoginServlet" method="post">
-  ユーザー名: <input type="text" name="username"><br>
-  パスワード: <input type="password" name="password"><br>
+  ユーザー名: <input type="text" name="username" required><br>
+  パスワード: <input type="password" name="password" required><br>
   <input type="submit" value="ログイン">
   <% if (request.getParameter("error") != null) { %>
   <p style="color:red;">ユーザー名またはパスワードが違います。</p>
