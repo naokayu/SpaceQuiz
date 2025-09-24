@@ -11,8 +11,11 @@
 <body>
     <h2>新規ユーザー登録</h2>
     <form action="signup" method="post">
-        ユーザー名: <input type="text" name="username" required><br>
-        パスワード: <input type="password" name="password" required><br>
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required><br>
+        
         <input type="submit" value="登録">
     </form>
 </body>

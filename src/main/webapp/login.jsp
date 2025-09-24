@@ -7,10 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>ログインしてください</h2>
+
 <form action="LoginServlet" method="post">
-  ユーザー名: <input type="text" name="username" required><br>
-  パスワード: <input type="password" name="password" required><br>
-  <input type="submit" value="ログイン">
+	<label for="username">ユーザー名:</label>
+	<input type="text" id="username" name="username" required><br>
+	<label for="password">パスワード:</label>
+	<input type="password" id="password" name="password" required><br>
+  
+  	<input type="submit" value="ログイン">
   <% if (request.getParameter("error") != null) { %>
   <p style="color:red;">ユーザー名またはパスワードが違います。</p>
 <% } %>
