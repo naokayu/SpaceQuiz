@@ -135,7 +135,7 @@ const quiz = [
 	},
 	{
 		q: "冬の大三角はベテルギウス、シリウス、あと1個は？",
-		choices: ["リゲル", "アルデバラン", "プロキオン", "ポルックス"],
+		choices: ["リゲル", "アルデバラン", "プロキシオン", "ポルックス"],
 		correctIndex: 2
 	},
 	{
@@ -293,7 +293,6 @@ const quiz = [
 		choices: ["スティーブン・ホーキング", "アインシュタイン", "カール・セガール", "エドウィンハッブル"],
 		correctIndex: 0
 	},
-
 ];
 
 const startScreen = document.getElementById("start-screen");
@@ -303,7 +302,6 @@ const questionEl = document.getElementById("question");
 const choicesEl = document.getElementById("choices");
 const resultEl = document.getElementById("result");
 const scoreEl = document.getElementById("score");
-const finalScoreEl = document.getElementById("final-score");
 
 function startQuiz() {
 	startScreen.classList.add("hidden");
@@ -358,54 +356,64 @@ function checkAnswer(selectedIndex) {
 	currentIndex++;
 	setTimeout(loadQuestion, 1000);
 }
+
 function showEndScreen() {
-	quizContainer.classList.add("hidden");
-	endScreen.classList.remove("hidden");
+    quizContainer.classList.add("hidden");
+    endScreen.classList.remove("hidden");
 
+    // ← 前の内容を全部消す
+    endScreen.innerHTML = "";
 
-	// スコア表示
-	const scoreElement = document.createElement("div");
-	scoreElement.textContent = `最終得点: ${score} / ${questions.length}`;
-	endScreen.appendChild(scoreElement);
+    // スコア
+    const scoreElement = document.createElement("div");
+    scoreElement.textContent = `最終得点: ${score} / ${questions.length}`;
+    endScreen.appendChild(scoreElement);
 
-	// --- 称号を決定 ---
-	let rankMessage = "";
-	if (score >= 9) {
-		rankMessage = "🌟 授けられる称号は…『宇宙博士』！";
-	} else if (score >= 6) {
-		rankMessage = "🔭 授けられる称号は…『宇宙研究員』！";
-	} else if (score >= 3) {
-		rankMessage = "🛰 授けられる称号は…『宇宙見習い』！";
-	} else {
-		rankMessage = "🌑 授けられる称号は…『宇宙初心者』！";
-	}
+    // 称号
+    let rankMessage = "";
+    if (score >= 9) {
+        rankMessage = "🌟 授けられる称号：宇宙博士";
+    } else if (score >= 7) {
+        rankMessage = "🚀 授けられる称号：宇宙探検家";
+    } else if (score >= 4) {
+        rankMessage = "🛰 授けられる称号：宇宙初心者";
+    } else {
+        rankMessage = "💤 授けられる称号：これから頑張ろう";
+    }
 
-	// 称号を表示
-	const rankElement = document.createElement("div");
-	rankElement.innerText = rankMessage;
-	rankElement.classList.add("rank-message");
-	endScreen.appendChild(rankElement);
+    const rankElement = document.createElement("div");
+    rankElement.textContent = rankMessage;
+    endScreen.appendChild(rankElement);
 
-	// --- スコア送信フォームを追加 ---
-	const form = document.createElement("form");
-	form.action = "saveScore";
-	form.method = "post";
+    // スコア保存ボタン
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "スコアを保存する";
+    saveButton.classList.add("blue-btn");
+    saveButton.onclick = saveScore;
+    endScreen.appendChild(saveButton);
 
-	const input = document.createElement("input");
-	input.type = "hidden";
-	input.name = "score";
-	input.value = score;
+    // もう一度プレイボタン
+    const retryButton = document.createElement("button");
+    retryButton.textContent = "もう一度プレイ";
+    retryButton.classList.add("blue-btn");
+    retryButton.onclick = startQuiz;
+    endScreen.appendChild(retryButton);
 
-	const submitBtn = document.createElement("input");
-	submitBtn.type = "submit";
-	submitBtn.value = "スコアを保存する";
-
-	form.appendChild(input);
-	form.appendChild(submitBtn);
-	endScreen.appendChild(form);
+    // JAXA公式サイトリンク
+    const linkButton = document.createElement("a");
+    linkButton.textContent = "🚀 宇宙についてもっと知る（JAXA公式サイトへ）";
+    linkButton.href = "https://www.jaxa.jp/";
+    linkButton.target = "_blank";
+    linkButton.classList.add("blue-btn");
+    endScreen.appendChild(linkButton);
 }
 
-
-function restartQuiz() {
-	startQuiz();
+function saveScore() {
+    const playerName = prompt("名前を入力してください:");
+    if (playerName) {
+        const savedScores = JSON.parse(localStorage.getItem("scores")) || [];
+        savedScores.push({ name: playerName, score: score, date: new Date().toLocaleString() });
+        localStorage.setItem("scores", JSON.stringify(savedScores));
+        alert("スコアが保存されました！");
+    }
 }

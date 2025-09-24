@@ -123,4 +123,28 @@ h1 {
   letter-spacing: 2px;
   animation: shine 2s ease-out;
 }
-  
+
+
+
+/* 共通ボタンスタイル（保存・リプレイ・リンク用） */
+.blue-btn {
+  display: inline-block;
+  margin: 10px 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1976d2; /* 青色 */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-align: center;
+  text-decoration: none; /* リンクの下線を消す */
+}
+
+.blue-btn:hover {
+  background: #1565c0;
+  text-decoration: none; /* ホバー時も下線を消す */
+}
+
