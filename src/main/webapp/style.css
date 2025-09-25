@@ -112,39 +112,91 @@ h1 {
   100% { opacity: 1; transform: scale(1) rotate(0); text-shadow: 0 0 10px #00ffff; }
 }
 
-.rank-message {
-  margin-top: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  background: rgba(0,0,0,0.7);
-  padding: 14px 22px;
-  border-radius: 14px;
-  display: inline-block;
-  letter-spacing: 2px;
-  animation: shine 2s ease-out;
-}
 
-
+  to {
+    box-shadow: 0 0 25px rgba(0, 200, 255, 1),
+                0 0 50px rgba(0, 150, 255, 0.9);
+  }
+  .rank-message {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.7);
+    padding: 14px 22px;
+    border-radius: 14px;
+    display: inline-block;
+    letter-spacing: 2px;
+    animation: shine 2s ease-out;
+  }
 
 /* 共通ボタンスタイル（保存・リプレイ・リンク用） */
 .blue-btn {
   display: inline-block;
-  margin: 10px 5px;
-  padding: 10px 20px;
+  margin: 12px 6px;
+  padding: 14px 28px;
   border: none;
-  border-radius: 8px;
-  background: #1976d2; /* 青色 */
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
   text-align: center;
-  text-decoration: none; /* リンクの下線を消す */
+  text-decoration: none;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden; /* 光がはみ出さないようにする */
+
+  /* 輝き */
+  box-shadow: 0 0 15px rgba(33, 203, 243, 0.7), 
+              0 0 30px rgba(33, 150, 243, 0.5);
+
+  transition: all 0.3s ease;
+  animation: pulseGlow 2s infinite alternate;
 }
 
 .blue-btn:hover {
-  background: #1565c0;
-  text-decoration: none; /* ホバー時も下線を消す */
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #1e88e5, #00e5ff);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.9),
+              0 0 50px rgba(33, 150, 243, 0.8);
 }
 
+.blue-btn:active {
+  transform: scale(0.95);
+}
+
+/* 点滅アニメーション */
+@keyframes pulseGlow {
+  from {
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.4),
+                0 0 20px rgba(33, 150, 243, 0.4);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.9),
+                0 0 40px rgba(33, 150, 243, 0.8);
+  }
+}
+
+/* 流れる光線エフェクト */
+.blue-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0%   { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
