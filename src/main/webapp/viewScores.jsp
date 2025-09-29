@@ -3,13 +3,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>スコア一覧</title>
+    <title>ランキング - トップ10</title>
 </head>
 <body>
-    <h2>スコア一覧</h2>
+    <h2>スコアランキング（トップ10）</h2>
     <table border="1" cellpadding="5" cellspacing="0">
         <tr>
-            <th>ID</th>
+            <th>順位</th>
             <th>ユーザー名</th>
             <th>スコア</th>
             <th>日時</th>
@@ -19,17 +19,23 @@
                 Class.forName("org.sqlite.JDBC");
                 Connection conn = DriverManager.getConnection("jdbc:sqlite:C:/sqlite/quiz.db");
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM scores ORDER BY played_at DESC");
+                
+                // スコア順に並べて、上位10件だけ取得
+                ResultSet rs = stmt.executeQuery(
+                    "SELECT username, score, played_at FROM scores ORDER BY score DESC, played_at ASC LIMIT 10"
+                );
 
+                int rank = 1; // 順位カウンタ
                 while (rs.next()) {
         %>
                     <tr>
-                        <td><%= rs.getInt("id") %></td>
+                        <td><%= rank %></td>
                         <td><%= rs.getString("username") %></td>
                         <td><%= rs.getInt("score") %></td>
                         <td><%= rs.getString("played_at") %></td>
                     </tr>
         <%
+                    rank++;
                 }
                 rs.close();
                 stmt.close();

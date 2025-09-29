@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8" />
   <title>宇宙クイズ - スタート画面付き</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <h1>宇宙クイズ 🚀</h1>
 
@@ -17,21 +15,26 @@
   </div>
 
   <!-- クイズ画面 -->
-<div id="quiz-container" class="hidden">
-  <p id="question"></p>
-  <div id="choices"></div>
-  <div id="result"></div>
-<div id="score"></div>
-</div>
+  <div id="quiz-container" class="hidden">
+    <p id="question"></p>
+    <div id="choices"></div>
+    <div id="result"></div>
+    <div id="score"></div>
+  </div>
 
-<!-- 結果画面 -->
-<div id="end-screen" class="hidden">
-  <h2>クイズ終了！</h2>
-  <div id="final-score"></div>
-  <button class="replay-btn" onclick="restartQuiz()">もう一度プレイ</button>
-</div>
+  <!-- 結果画面（内容は script.js が生成） -->
+  <div id="end-screen" class="hidden"></div>
+  
+  <!-- 結果画面 -->
+  <div id="end-screen" class="hidden">
+    <h2>クイズ終了！</h2>
+    <div id="final-score"></div>
+    <button class="replay-btn" onclick="restartQuiz()">もう一度プレイ</button>
+
+    <h3>ランキングTOP10</h3>
+    <div id="ranking"></div>   <!-- ←ここにランキングを埋め込む -->
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-    
