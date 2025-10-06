@@ -18,20 +18,24 @@ public class SignupServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");  // ★ 追加
+        response.setContentType("text/html; charset=UTF-8");
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        System.out.println("Loading driver, URL = jdbc:sqlite:C:/sqlite/quiz.db");
+        System.out.println("Connecting to MySQL...");
 
         try {
-            // ドライバをロード
-            Class.forName("org.sqlite.JDBC");
+            // MySQL JDBCドライバをロード
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // DBに接続
-            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:C:/sqlite/quiz.db")) {
-                // 同じ名前のユーザーが既にいるか確認
+            // MySQLに接続
+            try (Connection conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/quizdb?useSSL=false&serverTimezone=UTC",
+                    "root", // あなたのMySQLユーザー名
+                    "pass"  // あなたのMySQLパスワード
+            )) {
+                // 同じユーザー名が存在するか確認
                 PreparedStatement check = conn.prepareStatement("SELECT * FROM users WHERE username=?");
                 check.setString(1, username);
                 ResultSet rs = check.executeQuery();
