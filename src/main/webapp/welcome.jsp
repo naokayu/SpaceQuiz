@@ -8,7 +8,7 @@
 </head>
 <body>
 <%
-    // セッションからユーザー名を取得
+    // セッションからユーザー名を取得するところ
     String username = (String) session.getAttribute("username");
     if (username == null) {
         // ログインしていない場合はログイン画面へリダイレクト
@@ -18,7 +18,7 @@
 %>
 
 <h2><%= username %> さん、ようこそ！</h2>
-<p>ログインに成功しました 🚀</p>
+<p>🌎ログインに成功しました 🚀</p>
 
 <!-- クイズページへ進むリンク -->
 <a href="index.html">クイズを始める</a>
